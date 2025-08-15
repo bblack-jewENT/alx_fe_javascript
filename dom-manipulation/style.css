@@ -50,4 +50,23 @@ button {
 	transition: background 0.2s;
 }
 
+button:hover {
+	background: #2563eb;
+}
+
+div {
+	margin-bottom: 18px;
+}
+
+input[type="text"] {
+	padding: 8px 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	margin-right: 8px;
+	font-size: 1rem;
+	width: 180px;
+	transition: border 0.2s;
+}
+
+
 
