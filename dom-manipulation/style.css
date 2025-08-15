@@ -68,5 +68,11 @@ input[type="text"] {
 	transition: border 0.2s;
 }
 
+input[type="text"]:focus {
+	border: 1.5px solid #4f8cff;
+	outline: none;
+}
+
+
 
 
