@@ -1,0 +1,11 @@
+body {
+	font-family: 'Segoe UI', Arial, sans-serif;
+	background: #f4f6fb;
+	color: #222;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-height: 100vh;
+}
