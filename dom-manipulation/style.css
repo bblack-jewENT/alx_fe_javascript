@@ -28,3 +28,26 @@ h1 {
 	transition: box-shadow 0.2s;
 }
 
+#quoteDisplay p {
+	font-style: italic;
+	margin-bottom: 10px;
+}
+
+#quoteDisplay small {
+	color: #888;
+	font-size: 0.95em;
+}
+
+button {
+	background: #4f8cff;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	padding: 10px 22px;
+	font-size: 1rem;
+	cursor: pointer;
+	margin: 8px 0;
+	transition: background 0.2s;
+}
+
+
