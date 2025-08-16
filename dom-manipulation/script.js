@@ -27,11 +27,16 @@ function addQuote() {
     }
 
     localStorage.setItem('quote', JSON.stringify(quotes)); // Save to local Storage
+    
+    const quoteList = JSON.parse(localStorage.getItem('quote'));
+    quoteList.push({text, category});
+    showRandomQuote();
 }
 // 4. Event listener for the "Show New Quote" button
 document.getElementById('newQuote').addEventListener('click', showRandomQuote);
 // 5. Show a quote on page load
 showRandomQuote();
+
 
 
 
