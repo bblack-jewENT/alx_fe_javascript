@@ -1,3 +1,8 @@
+// --- Server Simulation and Sync Logic ---
+const SERVER_URL = 'https://jsonplaceholder.typicode.com/posts'; // Simulate with posts as quotes
+let syncing = false;
+
+
 // Track the currently selected category filter
 let selectedCategory = localStorage.getItem('lastCategoryFilter') || 'all';
 
@@ -125,6 +130,7 @@ function importFromJsonFile(event) {
     };
     fileReader.readAsText(event.target.files[0]);
 }
+
 
 
 
