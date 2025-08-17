@@ -1,3 +1,29 @@
+// Dynamically create and insert the add-quote form
+function createAddQuoteForm() {
+    const formDiv = document.createElement('div');
+    formDiv.id = 'addQuoteFormContainer';
+    formDiv.innerHTML = `
+        <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
+        <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
+        <button id="addQuoteBtn">Add Quote</button>
+    `;
+    // Insert before the export/import controls
+    const exportBtn = document.getElementById('exportQuotes');
+    document.body.insertBefore(formDiv, exportBtn);
+
+    // Add event listener for the add quote button
+    document.getElementById('addQuoteBtn').addEventListener('click', addQuote);
+}
+
+// Remove static form if present (for idempotency)
+const staticForm = document.getElementById('newQuoteText');
+if (staticForm) {
+    staticForm.parentElement.remove();
+}
+
+// Call the function to create the form on page load
+createAddQuoteForm();
+
 // Export quotes as a JSON file
 function exportToJsonFile() {
     const dataStr = JSON.stringify(quotes, null, 2);
