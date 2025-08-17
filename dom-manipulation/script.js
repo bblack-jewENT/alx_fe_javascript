@@ -10,6 +10,19 @@ function showNotification(msg) {
     setTimeout(() => { note.style.display = 'none'; }, 4000);
 }
 
+// Fetch quotes from server (simulate)
+async function fetchServerQuotes() {
+    try {
+        const res = await fetch(SERVER_URL);
+        const data = await res.json();
+        // Simulate server quotes as [{text, category}]
+        return data.slice(0, 10).map(post => ({ text: post.title, category: 'Server' }));
+    } catch (e) {
+        showNotification('Failed to fetch from server.');
+        return [];
+    }
+}
+
 // Track the currently selected category filter
 let selectedCategory = localStorage.getItem('lastCategoryFilter') || 'all';
 
@@ -137,6 +150,7 @@ function importFromJsonFile(event) {
     };
     fileReader.readAsText(event.target.files[0]);
 }
+
 
 
 
