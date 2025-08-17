@@ -92,6 +92,19 @@ input[type="text"]:focus {
 	background: #e6f0ff;
 }
 
+#categoryFilter {
+	padding: 8px 12px;
+	border: 1px solid #4f8cff;
+	border-radius: 5px;
+	background: #f4f6fb;
+	color: #222;
+	font-size: 1rem;
+	margin: 10px 0 18px 0;
+	cursor: pointer;
+	transition: border 0.2s, background 0.2s;
+	outline: none;
+}
+
 
 
 
