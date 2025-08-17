@@ -64,11 +64,18 @@ addQuote = function() {
     const categoryInput = document.getElementById('newQuoteCategory');
     const text = textInput.value.trim();
     const category = categoryInput.value.trim();
-    if (text && category) {
-        const newQuote = { text, category };
-        postQuoteToServer(newQuote); // Simulate server sync
-    }
-    originalAddQuote();
+        if (text && category) {
+            const newQuote = { text, category };
+            quotes.push(newQuote);
+            postQuoteToServer(newQuote); // Simulate server sync
+            textInput.value = '';
+            categoryInput.value = '';
+            localStorage.setItem('quote', JSON.stringify(quotes)); // Save to local Storage
+            populateCategories(); // Update dropdown if new category
+            filterQuotes(); // Show filtered/random quote
+        } else {
+            alert('Please enter both quote text and category.');
+        }
 };
 
 // Track the currently selected category filter
