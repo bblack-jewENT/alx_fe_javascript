@@ -1,3 +1,42 @@
+// Populate the category dropdown with unique categories from quotes array
+function populateCategories() {
+    const categoryFilter = document.getElementById('categoryFilter');
+    // Get unique categories
+    const categories = [...new Set(quotes.map(q => q.category))];
+    // Clear existing options except 'All Categories'
+    categoryFilter.innerHTML = '<option value="all">All Categories</option>';
+    categories.forEach(cat => {
+        const option = document.createElement('option');
+        option.value = cat;
+        option.textContent = cat;
+        categoryFilter.appendChild(option);
+    });
+    // Restore last selected filter from localStorage
+    const lastFilter = localStorage.getItem('lastCategoryFilter');
+    if (lastFilter) {
+        categoryFilter.value = lastFilter;
+    }
+}
+
+// Filter quotes based on selected category
+function filterQuotes() {
+    const categoryFilter = document.getElementById('categoryFilter');
+    const selected = categoryFilter.value;
+    localStorage.setItem('lastCategoryFilter', selected);
+    let filteredQuotes = quotes;
+    if (selected !== 'all') {
+        filteredQuotes = quotes.filter(q => q.category === selected);
+    }
+    // Show a random quote from filtered list
+    if (filteredQuotes.length > 0) {
+        const randomIndex = Math.floor(Math.random() * filteredQuotes.length);
+        const quote = filteredQuotes[randomIndex];
+        const display = document.getElementById('quoteDisplay');
+        display.innerHTML = `<p>"${quote.text}"</p><small>Category: ${quote.category}</small>`;
+    } else {
+        document.getElementById('quoteDisplay').innerHTML = '<p>No quotes in this category.</p>';
+    }
+}
 // Dynamically create and insert the add-quote form
 function createAddQuoteForm() {
     const formDiv = document.createElement('div');
@@ -63,21 +102,18 @@ function addQuote() {
         quotes.push({ text, category });
         textInput.value = '';
         categoryInput.value = '';
-        showRandomQuote(); // Show the new quote or a random one
+        localStorage.setItem('quote', JSON.stringify(quotes)); // Save to local Storage
+        populateCategories(); // Update dropdown if new category
+        filterQuotes(); // Show filtered/random quote
     } else {
         alert('Please enter both quote text and category.');
     }
-
-    localStorage.setItem('quote', JSON.stringify(quotes)); // Save to local Storage
-    
-    const quoteList = JSON.parse(localStorage.getItem('quote'));
-    quoteList.push({text, category});
-    showRandomQuote();
 }
 // 4. Event listener for the "Show New Quote" button
 document.getElementById('newQuote').addEventListener('click', showRandomQuote);
-// 5. Show a quote on page load
-showRandomQuote();
+// 5. Populate categories and restore filter on page load
+populateCategories();
+filterQuotes();
 
 function importFromJsonFile(event) {
     const fileReader = new FileReader();
