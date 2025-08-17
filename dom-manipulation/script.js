@@ -2,6 +2,13 @@
 const SERVER_URL = 'https://jsonplaceholder.typicode.com/posts'; // Simulate with posts as quotes
 let syncing = false;
 
+// Show notification
+function showNotification(msg) {
+    const note = document.getElementById('notification');
+    note.textContent = msg;
+    note.style.display = 'block';
+    setTimeout(() => { note.style.display = 'none'; }, 4000);
+}
 
 // Track the currently selected category filter
 let selectedCategory = localStorage.getItem('lastCategoryFilter') || 'all';
@@ -130,6 +137,7 @@ function importFromJsonFile(event) {
     };
     fileReader.readAsText(event.target.files[0]);
 }
+
 
 
 
