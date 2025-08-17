@@ -1,3 +1,6 @@
+// Track the currently selected category filter
+let selectedCategory = localStorage.getItem('lastCategoryFilter') || 'all';
+
 // Populate the category dropdown with unique categories from quotes array
 function populateCategories() {
     const categoryFilter = document.getElementById('categoryFilter');
@@ -11,21 +14,18 @@ function populateCategories() {
         option.textContent = cat;
         categoryFilter.appendChild(option);
     });
-    // Restore last selected filter from localStorage
-    const lastFilter = localStorage.getItem('lastCategoryFilter');
-    if (lastFilter) {
-        categoryFilter.value = lastFilter;
-    }
+    // Restore last selected filter from selectedCategory variable
+    categoryFilter.value = selectedCategory;
 }
 
 // Filter quotes based on selected category
 function filterQuotes() {
     const categoryFilter = document.getElementById('categoryFilter');
-    const selected = categoryFilter.value;
-    localStorage.setItem('lastCategoryFilter', selected);
+    selectedCategory = categoryFilter.value;
+    localStorage.setItem('lastCategoryFilter', selectedCategory);
     let filteredQuotes = quotes;
-    if (selected !== 'all') {
-        filteredQuotes = quotes.filter(q => q.category === selected);
+    if (selectedCategory !== 'all') {
+        filteredQuotes = quotes.filter(q => q.category === selectedCategory);
     }
     // Show a random quote from filtered list
     if (filteredQuotes.length > 0) {
