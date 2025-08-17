@@ -50,6 +50,8 @@ async function syncQuotes() {
         populateCategories();
         filterQuotes();
         showNotification('Quotes updated from server (server wins).');
+    } else {
+        showNotification('Quotes synced with server!');
     }
     syncing = false;
 }
