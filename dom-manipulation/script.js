@@ -36,6 +36,24 @@ async function postQuoteToServer(quote) {
     }
 }
 
+// Sync local quotes with server, server wins on conflict
+async function syncWithServer() {
+    if (syncing) return;
+    syncing = true;
+    const serverQuotes = await fetchServerQuotes();
+    const localQuotes = JSON.parse(localStorage.getItem('quote')) || quotes;
+    // Simple conflict: if not equal, server wins
+    if (JSON.stringify(serverQuotes) !== JSON.stringify(localQuotes)) {
+        localStorage.setItem('quote', JSON.stringify(serverQuotes));
+        quotes.length = 0;
+        quotes.push(...serverQuotes);
+        populateCategories();
+        filterQuotes();
+        showNotification('Quotes updated from server (server wins).');
+    }
+    syncing = false;
+}
+
 // Track the currently selected category filter
 let selectedCategory = localStorage.getItem('lastCategoryFilter') || 'all';
 
@@ -163,6 +181,7 @@ function importFromJsonFile(event) {
     };
     fileReader.readAsText(event.target.files[0]);
 }
+
 
 
 
