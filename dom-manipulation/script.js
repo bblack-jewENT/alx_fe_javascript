@@ -54,6 +54,23 @@ async function syncWithServer() {
     syncing = false;
 }
 
+// Periodically sync every 30 seconds
+setInterval(syncWithServer, 30000);
+
+// On addQuote, also post to server
+const originalAddQuote = addQuote;
+addQuote = function() {
+    const textInput = document.getElementById('newQuoteText');
+    const categoryInput = document.getElementById('newQuoteCategory');
+    const text = textInput.value.trim();
+    const category = categoryInput.value.trim();
+    if (text && category) {
+        const newQuote = { text, category };
+        postQuoteToServer(newQuote); // Simulate server sync
+    }
+    originalAddQuote();
+};
+
 // Track the currently selected category filter
 let selectedCategory = localStorage.getItem('lastCategoryFilter') || 'all';
 
@@ -181,6 +198,7 @@ function importFromJsonFile(event) {
     };
     fileReader.readAsText(event.target.files[0]);
 }
+
 
 
 
