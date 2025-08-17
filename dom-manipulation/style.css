@@ -105,6 +105,12 @@ input[type="text"]:focus {
 	outline: none;
 }
 
+#categoryFilter:focus {
+	border: 1.5px solid #2563eb;
+	background: #e6f0ff;
+}
+
+
 
 
 
