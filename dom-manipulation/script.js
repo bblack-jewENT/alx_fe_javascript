@@ -24,7 +24,7 @@ async function fetchServerQuotes() {
 }
 
 // Post new quote to server (simulate)
-async function postQuoteToServer(quote) {
+async function fetchQuotesFromServer() {
     try {
         await fetch(SERVER_URL, {
             method: 'POST',
@@ -37,7 +37,7 @@ async function postQuoteToServer(quote) {
 }
 
 // Sync local quotes with server, server wins on conflict
-async function syncWithServer() {
+async function syncQuotes() {
     if (syncing) return;
     syncing = true;
     const serverQuotes = await fetchServerQuotes();
@@ -55,7 +55,7 @@ async function syncWithServer() {
 }
 
 // Periodically sync every 30 seconds
-setInterval(syncWithServer, 30000);
+setInterval(syncQuotes, 30000);
 
 // On addQuote, also post to server
 const originalAddQuote = addQuote;
