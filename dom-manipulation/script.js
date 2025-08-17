@@ -23,6 +23,19 @@ async function fetchServerQuotes() {
     }
 }
 
+// Post new quote to server (simulate)
+async function postQuoteToServer(quote) {
+    try {
+        await fetch(SERVER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(quote)
+        });
+    } catch (e) {
+        showNotification('Failed to sync new quote to server.');
+    }
+}
+
 // Track the currently selected category filter
 let selectedCategory = localStorage.getItem('lastCategoryFilter') || 'all';
 
@@ -150,6 +163,7 @@ function importFromJsonFile(event) {
     };
     fileReader.readAsText(event.target.files[0]);
 }
+
 
 
 
