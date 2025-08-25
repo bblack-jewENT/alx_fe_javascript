@@ -13,10 +13,9 @@
         background-color: rgb(199, 236, 226);
       }
       div {
-        background-color: rgb(156, 106, 116);
+        background-color: rgb(210, 5, 46);
         border-radius: 30px;
         margin: 10px;
-        padding: 20px;
       }
       div,
       input {
@@ -25,10 +24,9 @@
         border-radius: 10px;
       }
       button {
-        color: rgb(17, 13, 4);
-        background-color: rgb(176, 122, 156);
+        color: goldenrod;
+        background-color: rgb(153, 14, 102);
         border-radius: 20px;
-        padding: 10px;
       }
     </style>
   </head>
@@ -47,20 +45,6 @@
       />
       <button onclick="addQuote()">Add Quote</button>
     </div>
-
-    <input
-      type="file"
-      id="importFile"
-      accept=".json"
-      onchange="importFromJsonFile(event)"
-    />
-    <button id="addfiles" onclick="addFile()">Add File</button>
-     <button id="exportQuotes">Export Quotes</button>
-      <select id="categoryFilter" onchange="filterQuotes()">
-        <option value="all">All Categories</option>
-        <!-- Dynamically populated categories -->
-      </select>
-    <input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
 
     <script src="script.js"></script>
   </body>
